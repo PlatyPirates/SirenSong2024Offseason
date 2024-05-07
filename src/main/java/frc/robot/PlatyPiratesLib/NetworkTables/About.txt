@@ -1,0 +1,18 @@
+NTInt, NTDouble, NTString,
+
+We use NetworkTables to report values to any other processors (eg. Raspberry Pi). Writing all of the topics
+and publishers is tedious and takes up a lot of space in the code, so we created some super simple values
+that do all of the topics and publishing behind the scenes so that we can shorten code to initialize a value
+that will be published to NetworkTables from this:
+
+int robotSpeed;
+DoubleTopic speed = ntinst.getDoubleTopic("/datatable/Speed");
+final DoublePublisher speedPub = speed.publish();
+speed.setDefault(0.0);
+speed.set(robotSpeed);
+
+to this:
+
+NTDouble speed = new NTDouble(0.0,"Speed");
+
+Much shorter! 👍
